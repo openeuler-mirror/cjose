@@ -1,0 +1,54 @@
+From c345a1ae4d41856ee5aa7a93f1cbad838649632c Mon Sep 17 00:00:00 2001
+From: Hans Zandbelt <hans.zandbelt@zmartzone.eu>
+Date: Tue, 5 Apr 2022 16:16:14 +0200
+Subject: [PATCH] allow compilation against OpenSSL 3
+
+using "#define OPENSSL_API_COMPAT 0x10000000L"
+closes https://github.com/zmartzone/cjose/pull/13
+
+Signed-off-by: Hans Zandbelt <hans.zandbelt@zmartzone.eu>
+---
+ src/jwe.c    | 2 ++
+ src/jwk.c    | 2 ++
+ src/jws.c    | 2 ++
+ 4 files changed, 7 insertions(+)
+
+diff --git a/src/jwe.c b/src/jwe.c
+index b20c2c7..4285097 100644
+--- a/src/jwe.c
++++ b/src/jwe.c
+@@ -5,6 +5,8 @@
+  * Copyright (c) 2014-2016 Cisco Systems, Inc.  All Rights Reserved.
+  */
+ 
++#define OPENSSL_API_COMPAT 0x10000000L
++
+ #include <cjose/base64.h>
+ #include <cjose/header.h>
+ #include <cjose/jwe.h>
+diff --git a/src/jwk.c b/src/jwk.c
+index 860f0e7..2e4b241 100644
+--- a/src/jwk.c
++++ b/src/jwk.c
+@@ -5,6 +5,8 @@
+  * Copyright (c) 2014-2016 Cisco Systems, Inc.  All Rights Reserved.
+  */
+ 
++#define OPENSSL_API_COMPAT 0x10000000L
++
+ #include "include/jwk_int.h"
+ #include "include/util_int.h"
+ 
+diff --git a/src/jws.c b/src/jws.c
+index 47fb880..d73debb 100644
+--- a/src/jws.c
++++ b/src/jws.c
+@@ -5,6 +5,8 @@
+  * Copyright (c) 2014-2016 Cisco Systems, Inc.  All Rights Reserved.
+  */
+ 
++#define OPENSSL_API_COMPAT 0x10000000L
++
+ #include <cjose/base64.h>
+ #include <cjose/header.h>
+ #include <cjose/jws.h>
