@@ -1,6 +1,6 @@
 Name:                cjose
 Version:             0.6.1
-Release:             4
+Release:             5
 Summary:             C library implementing the Javascript Object Signing and Encryption (JOSE)
 License:             MIT
 URL:                 https://github.com/cisco/cjose
@@ -22,6 +22,10 @@ developing applications that use %{name}.
 %autosetup -n %{name}-%{version} -p1
 
 %build
+%if "%toolchain" == "clang"
+    CFLAGS="$CFLAGS -Wno-error=strict-prototypes"
+%endif
+
 %configure
 %make_build
 
@@ -49,6 +53,9 @@ make check || (cat test/test-suite.log; exit 1)
 %{_libdir}/pkgconfig/cjose.pc
 
 %changelog
+* Fri Apr 21 2023 jammyjellyfish <jammyjellyfish255@outlook.com> - 0.6.1-5
+- Fix clang build error
+
 * Fri Feb 03 2023 xu_ping <xuping33@h-partners.com> - 0.6.1-4
 - Fix build failure due to openssl upgrade 3.0
 
